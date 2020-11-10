@@ -111,7 +111,7 @@ puppeteer.launch({
 				return product;
 			}, storesToCheck);
 
-			// console.log(result);
+			console.log(result);
 
 			for(let store of result.stores) {
 				if(store.inventory != "Out of stock") {
