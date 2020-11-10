@@ -85,7 +85,7 @@ puppeteer.launch({
 				const productDesc = document.querySelector("span.range-revamp-header-section__description-text").innerText;
 				const productMeasure = document.querySelector("range-revamp-header-section__description-measurement").innerText;
 				const product = {
-					product: productTitle.concat(" ", productDesc, ", ", productMeasure),
+					product: productTitle.concat(" ", productDesc, " - ", productMeasure),
 					url: window.location.href,
 					stores: []
 				}
