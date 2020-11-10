@@ -31,7 +31,7 @@ puppeteer.launch({
 			await page.evaluate(() => {
 				const storeListOpen = Array.from(document.querySelectorAll('a')).find(el => el.innerText === "Check another IKEA store");
 				storeListOpen.click();
-			}
+			});
 
 			await page.waitForTimeout("range-revamp-change-store");
 
