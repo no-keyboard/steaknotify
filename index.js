@@ -77,6 +77,7 @@ puppeteer.launch({
 			});
 
 			await page.waitForSelector("div.range-revamp-header-section__title--big");
+			await page.waitForSelector("div.range-revamp-header-section__description");
 			await page.waitForSelector("div.range-revamp-change-store__stores");
 
 			result = await page.evaluate(storesToCheck => {
