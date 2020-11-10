@@ -24,7 +24,7 @@ puppeteer.launch({
 .then(async browser => {
 	const page = await browser.newPage();
 	
-	urlList.forEach(url => {
+	urlList.forEach(url => async () => {
 		try {
 			await page.goto(url);
 			await page.waitForTimeout("div.js-stockcheck-section");
