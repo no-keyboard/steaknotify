@@ -60,8 +60,8 @@ bot.on('ready', () => {
 
 puppeteer.launch({
 	args: ['--no-sandbox'],
-	headless: false,
-	executablePath: 'chromium-browser'
+	headless: true,
+	// executablePath: 'chromium-browser'
 })
 .then(async browser => {
 	const page = await browser.newPage();
