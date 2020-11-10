@@ -25,11 +25,9 @@ puppeteer.launch({
 	const page = await browser.newPage();
 	
 	urlList.forEach(url => {
-		await page.goto(url);
-
 		try {
+			await page.goto(url);
 			await page.waitForTimeout("div.js-stockcheck-section");
-
 			await page.evaluate(() => {
 				const storeListOpen = Array.from(document.querySelectorAll('a')).find(el => el.innerText === "Check another IKEA store");
 				storeListOpen.click();
