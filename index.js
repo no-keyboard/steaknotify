@@ -82,7 +82,7 @@ puppeteer.launch({
 
 			result = await page.evaluate(storesToCheck => {
 				const productTitle = document.querySelector("div.range-revamp-header-section__title--big").innerText;
-				const productDesc = document.querySelector("div.range-revamp-header-section__description").innerText;
+				const productDesc = document.querySelector("span.range-revamp-header-section__description-text").innerText;
 				const product = {
 					product: productTitle.concat(" ", productDesc),
 					url: window.location.href,
