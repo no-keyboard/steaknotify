@@ -49,13 +49,13 @@ const urlListEmbed = urls => {
 bot.login(discordApi);
 bot.on('ready', () => {
 	console.info("Logged into Discord!");
-	bot.channels.cache.get(channel).send({
-		embed: {
-			title: "Checking pages!",
-			fields: urlListEmbed(urlList),
-			timestamp: new Date()
-		}
-	});
+	// bot.channels.cache.get(channel).send({
+	// 	embed: {
+	// 		title: "Checking pages!",
+	// 		fields: urlListEmbed(urlList),
+	// 		timestamp: new Date()
+	// 	}
+	// });
 });
 
 puppeteer.launch({
