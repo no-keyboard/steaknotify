@@ -10,7 +10,8 @@ const errorLog = process.env.ERROR_CHANNEL;
 const tagUser = process.env.TAG_USER;
 const url = process.env.URL;
 const urlList = url.split(";");
-const storesToCheck = ["Brooklyn, NY", "Long Island, NY", "New Haven, CT"];
+const stores = process.env.STORES;
+const storesToCheck = stores.split(";");
 
 const createEmbed = (name, url, stores) => {
 	const inventoryFields = []
