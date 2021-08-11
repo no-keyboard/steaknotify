@@ -70,38 +70,38 @@ puppeteer.launch({
 	for(let url of urlList) {
 		try {
 			await page.goto(url);
-			await page.waitForSelector("a.range-revamp-stockcheck__available-for-delivery-link");
+			await page.waitForSelector("div[data-testid='stock-message']");
 
 			await page.evaluate(() => {
-				const storeListOpen = Array.from(document.querySelectorAll('a')).find(el => el.innerText === "Check in-store stock");
+				const storeListOpen = Array.from(document.querySelectorAll('a')).find(el => el.innerText === "check other IKEA stores");
 				storeListOpen.click();
 			});
 
-			await page.waitForSelector("div.range-revamp-header-section__title--big");
-			await page.waitForSelector("span.range-revamp-header-section__description-text");
-			await page.waitForSelector("div.range-revamp-change-store__stores");
+			await page.waitForSelector("div.modal-body");
+			await page.waitForSelector("#store-search");
 
 			result = await page.evaluate(storesToCheck => {
-				const productTitle = document.querySelector("div.range-revamp-header-section__title--big").innerText;
-				const productDesc = document.querySelector("span.range-revamp-header-section__description-text").innerText;
-				const productMeasure = document.querySelector("span.range-revamp-header-section__description-measurement").innerText;
+				const productTitle = document.querySelector("div.range-revamp-header-section__title--big").innerText + " ";
+				const productDesc = document.querySelector("div.range-revamp-header-section__description").innerText;
 				const product = {
-					product: productTitle.concat(" ", productDesc, ", ", productMeasure),
+					product: productTitle + productDesc,
 					url: window.location.href,
 					stores: []
 				}
 				let storesChecked = [];
-				const storeList = document.querySelector("div.range-revamp-change-store__stores").children;
+				const storeList = document.querySelector("div.modal-body").children;
 
 				for(store of storeList) {
-					const storeName = store.querySelector("div.range-revamp-change-store__store-info").innerText;
-					const storeInventory = store.querySelector("span.range-revamp-stockcheck__store-text").innerText;
-				
-					if(storesToCheck.includes(storeName)) {
-						product.stores.push({
-							store: storeName,
-							inventory: storeInventory
-						});
+					if(store.querySelector("span.stock-ingka-radio__label")) {
+						console.log(store);
+						const storeName = store.querySelector("span.stock-ingka-radio__label label div").children[0].innerText;
+						const storeInventory = store.querySelector("span.stock-ingka-radio__label label div").children[2].innerText;
+						if(storesToCheck.includes(storeName)) {
+							product.stores.push({
+								store: storeName,
+								inventory: storeInventory
+							});
+						}
 					}
 
 					if(storesChecked.length === storesToCheck.length) {
@@ -121,7 +121,8 @@ puppeteer.launch({
 				}
 			}
 		} catch(err) {
-			bot.channels.cache.get(errorLog).send(err);
+			console.error(err);
+			// bot.channels.cache.get(errorLog).send(err);
 		}
 	}
 
