@@ -65,7 +65,10 @@ puppeteer.launch({
 	// executablePath: 'chromium-browser'
 })
 .then(async browser => {
+	const context = browser.defaultBrowserContext()
+	await context.overridePermissions(url, ['geolocation'])
 	const page = await browser.newPage();
+	await page.setGeolocation({latitude: 41.308273, longitude: -72.927879})
 
 	for(let url of urlList) {
 		try {
