@@ -73,7 +73,7 @@ puppeteer.launch({
 	for(let url of urlList) {
 		try {
 			await page.goto(url);
-			await page.waitForSelector("div[data-testid='stock-message']");
+			await page.waitForSelector("usdh-availability-cash-and-carry-section");
 
 			await page.evaluate(() => {
 				const storeListOpen = Array.from(document.querySelectorAll('a')).find(el => el.innerText === "check other IKEA stores");
