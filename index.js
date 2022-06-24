@@ -86,21 +86,21 @@ puppeteer.launch({
 			await page.waitForSelector("div.usdh-availability-store-search");
 
 			result = await page.evaluate(storesToCheck => {
-				const productTitle = document.querySelector("div.range-revamp-header-section__title--big").innerText + " ";
-				const productDesc = document.querySelector("div.range-revamp-header-section__description").innerText;
+				const productTitle = document.querySelector("span.pip-header-section__title--big").innerText + " ";
+				const productDesc = document.querySelector("span.pip-header-section__description-text").innerText;
 				const product = {
 					product: productTitle + productDesc,
 					url: window.location.href,
 					stores: []
 				}
 				let storesChecked = [];
-				const storeList = document.querySelector("div.modal-body").children;
+				const storeList = document.querySelectorAll("div.usdh-availability-store-information-card");
 
 				for(store of storeList) {
-					if(store.querySelector("span.stock-ingka-radio__label")) {
+					if(store.querySelector("h3 span")) {
 						console.log(store);
-						const storeName = store.querySelector("span.stock-ingka-radio__label label div").children[0].innerText;
-						const storeInventory = store.querySelector("span.stock-ingka-radio__label label div").children[2].innerText;
+						const storeName = store.querySelector("h3 span").innerText;
+						const storeInventory = store.querySelector("span").innerTex;
 						if(storesToCheck.includes(storeName)) {
 							product.stores.push({
 								store: storeName,
