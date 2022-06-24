@@ -72,7 +72,9 @@ puppeteer.launch({
 
 	for(let url of urlList) {
 		try {
+			console.log(`Navigating to ${url}`);
 			await page.goto(url);
+			console.log(`Successfully navigated to ${url}`);
 			await page.waitForSelector("#usdh-availability-cash-and-carry-section");
 
 			await page.evaluate(() => {
