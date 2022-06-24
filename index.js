@@ -100,7 +100,7 @@ puppeteer.launch({
 					if(store.querySelector("h3 span")) {
 						console.log(store);
 						const storeName = store.querySelector("h3 span").innerText;
-						const storeInventory = store.querySelector("span").innerTex;
+						const storeInventory = store.querySelector("span").innerText;
 						if(storesToCheck.includes(storeName)) {
 							product.stores.push({
 								store: storeName,
