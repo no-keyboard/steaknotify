@@ -82,8 +82,8 @@ puppeteer.launch({
 				storeListOpen.click();
 			});
 
-			//await page.waitForSelector("usdh-availability-modal-body");
-			await page.waitForSelector("usdh-availability-store-search");
+			await page.waitForSelector("div.usdh-availability-modal-body");
+			await page.waitForSelector("div.usdh-availability-store-search");
 
 			result = await page.evaluate(storesToCheck => {
 				const productTitle = document.querySelector("div.range-revamp-header-section__title--big").innerText + " ";
