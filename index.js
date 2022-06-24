@@ -120,7 +120,7 @@ puppeteer.launch({
 			console.log(result);
 
 			for(let store of result.stores) {
-				if(store.inventory != "Out of stock" AND store.inventory != "Not available at this location") {
+				if(store.inventory != "Out of stock" && store.inventory != "Not available at this location") {
 					bot.channels.cache.get(channel).send(createEmbed(result.product, result.url, result.stores));
 					break;
 				}
