@@ -52,7 +52,7 @@ puppeteer.launch({
 		await page.waitForSelector("#js-location");
 
 		const result = await page.evaluate(() => {
-			return document.querySelector("#js-location").options;
+			return document.querySelector("#js-location").options[1];
 		});
 
 		console.log(result);
