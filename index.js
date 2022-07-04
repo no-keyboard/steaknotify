@@ -43,39 +43,37 @@ puppeteer.launch({
 	await context.overridePermissions(url, ['geolocation'])
 	await page.setGeolocation({latitude: 41.308273, longitude: -72.927879})
 
-	for(let url of urlList) {
-		try {
-			console.log(`Going to ${url}`);
-			await page.goto(url);
-			console.log(`Successfully navigated to ${url}`);
-			await page.waitForSelector("div.reservations-container");
-			await page.waitForSelector("#js-location");
+	try {
+		console.log(`Going to ${url}`);
+		await page.goto(url);
+		console.log(`Successfully navigated to ${url}`);
+		await page.waitForSelector("div.reservations-container");
+		await page.waitForSelector("#js-location");
 
-			result = await page.evaluate(() => {
-				const locations = document.querySelector("#js-location").options;
-				let locationFound = false;
+		result = await page.evaluate(() => {
+			const locations = document.querySelector("#js-location").options;
+			let locationFound = false;
 
-				for(location of locations) {
-					console.log(location.dataset.address);
-					if(location.dataset.address.includes("11373")) {
-						locationFound = true;
-						break;
-					}
+			for(location of locations) {
+				console.log(location.dataset.address);
+				if(location.dataset.address.includes("11373")) {
+					locationFound = true;
+					break;
 				}
-
-				return locationFound;
-			});
-
-			console.log(result);
-
-			if(result) {
-				bot.channels.cache.get(channel).send(createEmbed(`Restaurant found!`, url));
-				break;
 			}
-		} catch(err) {
-			console.error(err);
-			// bot.channels.cache.get(errorLog).send(err);
+
+			return locationFound;
+		});
+
+		console.log(result);
+
+		if(result) {
+			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found!`, url));
+			break;
 		}
+	} catch(err) {
+		console.error(err);
+		// bot.channels.cache.get(errorLog).send(err);
 	}
 
 	await browser.close();
