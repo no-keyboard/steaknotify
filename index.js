@@ -58,7 +58,7 @@ puppeteer.launch({
 				console.log(location.dataset.address);
 				if(location.dataset.address.includes("11373")) {
 					locationFound = true;
-					//break;
+					break;
 				}
 			}
 
@@ -69,7 +69,6 @@ puppeteer.launch({
 
 		if(result) {
 			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found!`, url));
-			break;
 		}
 	} catch(err) {
 		console.error(err);
