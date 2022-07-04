@@ -73,7 +73,7 @@ puppeteer.launch({
 		console.log(result);
 
 		if(result) {
-			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for !`, url));
+			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for ${zipCode}!`, url));
 		}
 	} catch(err) {
 		console.error(err);
