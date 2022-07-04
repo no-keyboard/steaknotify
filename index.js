@@ -54,7 +54,7 @@ puppeteer.launch({
 			const locations = document.querySelector("#js-location").options;
 			let locationFound = false;
 
-			for(location of locations) {
+			for(const location of locations) {
 				console.log(location.dataset.address);
 				if(location.dataset.address.includes("11373")) {
 					locationFound = true;
