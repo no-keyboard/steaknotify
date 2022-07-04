@@ -51,12 +51,12 @@ puppeteer.launch({
 		await page.waitForSelector("div.reservations-container");
 		await page.waitForSelector("#js-location");
 
-		result = await page.evaluate(() => {
-			return document.querySelector("#js-location").options;
+		const result = await page.evaluate(() => {
+			const locations = document.querySelector("#js-location").options;
+			return locations[1];
 		});
 
-		const locations = Array.from(result);
-		console.log(locations);
+		console.log(result);
 
 		let locationFound = false;
 
