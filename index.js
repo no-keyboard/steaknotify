@@ -56,7 +56,7 @@ puppeteer.launch({
 		});
 
 		console.log(result);
-		console.log(result[1]);
+		console.log(result[1].dataset.address);
 
 		let locationFound = false;
 
