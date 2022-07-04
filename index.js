@@ -48,7 +48,6 @@ puppeteer.launch({
 		console.log(`Going to ${url}`);
 		await page.goto(url);
 		console.log(`Successfully navigated to ${url}`);
-		await page.waitForSelector("div.reservations-container");
 		await page.waitForSelector("#js-location");
 
 		const result = await page.evaluate(() => {
@@ -56,7 +55,7 @@ puppeteer.launch({
 		});
 
 		console.log(result);
-		console.log(result[1].dataset.address);
+		console.log(result[2].dataset);
 
 		let locationFound = false;
 
