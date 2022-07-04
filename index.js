@@ -9,6 +9,7 @@ const channel = process.env.CHANNEL;
 const errorLog = process.env.ERROR_CHANNEL;
 const tagUser = process.env.TAG_USER;
 const url = process.env.URL;
+const zipCode = process.env.ZIP_CODE;
 
 const createEmbed = (name, url) => {
 	return {
@@ -50,14 +51,14 @@ puppeteer.launch({
 		await page.waitForSelector("div.reservations-container");
 		await page.waitForSelector("#js-location");
 
-		result = await page.evaluate(() => {
+		result = await page.evaluate(zipCode => {
 			const locations = document.querySelector("#js-location").options;
 			let locationFound = false;
 
 			for(location of locations) {
 				try {
 					console.log(location.dataset);
-					if(location.dataset.address.includes("11373")) {
+					if(location.dataset.address.includes(zipCode)) {
 						locationFound = true;
 						break;
 					}
@@ -67,12 +68,12 @@ puppeteer.launch({
 			}
 
 			return locationFound;
-		});
+		}, zipCode);
 
 		console.log(result);
 
 		if(result) {
-			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found!`, url));
+			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for !`, url));
 		}
 	} catch(err) {
 		console.error(err);
