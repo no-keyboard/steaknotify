@@ -51,26 +51,26 @@ puppeteer.launch({
 		await page.waitForSelector("div.reservations-container");
 		await page.waitForSelector("#js-location");
 
-		result = await page.evaluate(zipCode => {
-			const locations = document.querySelector("#js-location").options;
-			let locationFound = false;
-
-			for(location of locations) {
-				try {
-					console.log(location.dataset);
-					if(location.dataset.address.includes(zipCode)) {
-						locationFound = true;
-						break;
-					}
-				} catch(err) {
-					console.error('No dataset');
-				}
-			}
-
-			return locationFound;
-		}, zipCode);
+		result = await page.evaluate(() => {
+			return document.querySelector("#js-location").options;
+		});
 
 		console.log(result);
+
+		const locations = result;
+		let locationFound = false;
+
+		for(location of locations) {
+			try {
+				console.log(location.dataset.address);
+				if(location.dataset.address.includes(zipCode)) {
+					locationFound = true;
+					break;
+				}
+			} catch(err) {
+				console.error('No dataset');
+			}
+		}
 
 		if(result) {
 			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for ${zipCode}!`, url));
