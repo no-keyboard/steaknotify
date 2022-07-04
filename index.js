@@ -57,12 +57,11 @@ puppeteer.launch({
 
 		console.log(result);
 
-		const locations = result;
 		let locationFound = false;
 
-		for(location of locations) {
+		for(location of result) {
 			try {
-				console.log(location.dataset.address);
+				console.log(location.dataset);
 				if(location.dataset.address.includes(zipCode)) {
 					locationFound = true;
 					break;
