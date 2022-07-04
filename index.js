@@ -9,9 +9,6 @@ const channel = process.env.CHANNEL;
 const errorLog = process.env.ERROR_CHANNEL;
 const tagUser = process.env.TAG_USER;
 const url = process.env.URL;
-const urlList = url.split(";");
-const stores = process.env.STORES;
-const storesToCheck = stores.split(";");
 
 const createEmbed = (name, url, stores) => {
 	const inventoryFields = []
