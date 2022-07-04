@@ -56,6 +56,7 @@ puppeteer.launch({
 		});
 
 		console.log(result);
+		console.log(result[1]);
 
 		let locationFound = false;
 
