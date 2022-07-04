@@ -55,10 +55,14 @@ puppeteer.launch({
 			let locationFound = false;
 
 			for(location of locations) {
-				console.log(location.dataset.address);
-				if(location.dataset.address.includes("11373")) {
-					locationFound = true;
-					break;
+				try {
+					console.log(location.dataset);
+					if(location.dataset.address.includes("11373")) {
+						locationFound = true;
+						break;
+					}
+				} catch(err) {
+					console.error('No dataset');
 				}
 			}
 
