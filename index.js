@@ -55,13 +55,14 @@ puppeteer.launch({
 			return document.querySelector("#js-location").options;
 		});
 
-		console.log(result);
+		const locations = Array.from(result);
+		console.log(locations);
 
 		let locationFound = false;
 
-		for(location of Array.from(result)) {
-			try {
-				console.log(location.dataset);
+		for(location of locations) {
+			console.log(location);
+			try {	
 				if(location.dataset.address.includes(zipCode)) {
 					locationFound = true;
 					break;
@@ -71,7 +72,7 @@ puppeteer.launch({
 			}
 		}
 
-		if(result) {
+		if(locationFound) {
 			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for ${zipCode}!`, url));
 		}
 	} catch(err) {
