@@ -52,15 +52,14 @@ puppeteer.launch({
 		await page.waitForSelector("#js-location");
 
 		const result = await page.evaluate(() => {
-			const locations = document.querySelector("#js-location").options;
-			return locations[1];
+			return locations = document.querySelector("#js-location").options;
 		});
 
 		console.log(result);
 
 		let locationFound = false;
 
-		for(location of locations) {
+		for(location of result) {
 			console.log(location);
 			try {	
 				if(location.dataset.address.includes(zipCode)) {
