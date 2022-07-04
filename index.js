@@ -59,7 +59,7 @@ puppeteer.launch({
 
 		let locationFound = false;
 
-		for(location of result) {
+		for(location of Array.from(result)) {
 			try {
 				console.log(location.dataset);
 				if(location.dataset.address.includes(zipCode)) {
