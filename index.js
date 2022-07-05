@@ -50,26 +50,26 @@ puppeteer.launch({
 		console.log(`Successfully navigated to ${url}`);
 		await page.waitForSelector("#js-location");
 
-		const result = await page.evaluate(() => {
-			return document.querySelectorAll("#js-location option");
+		result = await page.evaluate(() => {
+			return document.querySelectorAll("#js-location option")[1];
 		});
 
 		console.log(result);
-		console.log(result[2].innerText);
+		//console.log(result[2].innerText);
 
 		let locationFound = false;
 
-		for(location of result) {
-			console.log(location);
-			try {	
-				if(location.dataset.address.includes(zipCode)) {
-					locationFound = true;
-					break;
-				}
-			} catch(err) {
-				console.error('No dataset');
-			}
-		}
+		// for(location of result) {
+		// 	console.log(location);
+		// 	try {	
+		// 		if(location.dataset.address.includes(zipCode)) {
+		// 			locationFound = true;
+		// 			break;
+		// 		}
+		// 	} catch(err) {
+		// 		console.error('No dataset');
+		// 	}
+		// }
 
 		if(locationFound) {
 			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for ${zipCode}!`, url));
