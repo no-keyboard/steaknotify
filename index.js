@@ -48,10 +48,11 @@ puppeteer.launch({
 		console.log(`Going to ${url}`);
 		await page.goto(url);
 		console.log(`Successfully navigated to ${url}`);
-		await page.waitForSelector("#js-location");
+		await page.waitForSelector(".main");
 
 		result = await page.evaluate(() => {
-			return document.querySelectorAll("#js-location option")[1].innerText;
+			//return document.querySelectorAll("#js-location option")[1].innerText;
+			return document.querySelector("div.reservations-container ");
 		});
 
 		console.log(result);
@@ -71,7 +72,7 @@ puppeteer.launch({
 		// 	}
 		// }
 
-		if(locationFound) {
+		if(result) {
 			bot.channels.cache.get(channel).send(createEmbed(`Restaurant found for ${zipCode}!`, url));
 		}
 	} catch(err) {
