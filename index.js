@@ -52,7 +52,11 @@ puppeteer.launch({
 
 		result = await page.evaluate(() => {
 			//return document.querySelectorAll("#js-location option")[1].innerText;
-			return document.querySelector("div.reservations-container");
+			if(document.querySelector("div.reservations-container")) {
+				return true;
+			} else {
+				return false;
+			}
 		});
 
 		console.log(result);
